@@ -1,356 +1,148 @@
-<!DOCTYPE html>
+l<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>SMART TRADE</title>
 
 <style>
 *{box-sizing:border-box}
-
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#07111f;
-  color:#fff;
+ margin:0;background:#07111f;color:#fff;
+ font-family:Arial,sans-serif
 }
-
 header{
-  background:#0b1728;
-  border-bottom:1px solid #263b55;
-  padding:15px;
-  position:sticky;
-  top:0;
-  z-index:100;
+ background:#0b1728;border-bottom:1px solid #263b55;
+ padding:15px;position:sticky;top:0;z-index:10
 }
-
 .top{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+ max-width:1200px;margin:auto;display:flex;
+ justify-content:space-between;align-items:center;gap:10px
 }
-
-.logo{
-  font-size:22px;
-  font-weight:bold;
-  color:#19e68c;
-}
-
-.balance{
-  font-size:14px;
-  color:#b9c7d8;
-}
-
+.logo{font-size:22px;font-weight:bold;color:#19e68c}
+.balance{font-size:13px;color:#b9c7d8}
 nav{
-  max-width:1200px;
-  margin:12px auto 0;
-  display:flex;
-  gap:7px;
-  overflow-x:auto;
+ max-width:1200px;margin:12px auto 0;
+ display:flex;gap:7px;overflow-x:auto
 }
-
 nav button{
-  border:0;
-  background:#14243a;
-  color:#d9e4f2;
-  padding:10px 14px;
-  border-radius:8px;
-  white-space:nowrap;
-  cursor:pointer;
+ border:0;background:#14243a;color:#d9e4f2;
+ padding:10px 14px;border-radius:8px;
+ white-space:nowrap;cursor:pointer
 }
-
-nav button.active,
-nav button:hover{
-  background:#19e68c;
-  color:#06120e;
-}
-
-main{
-  max-width:1200px;
-  margin:auto;
-  padding:18px;
-}
-
+nav button.active{background:#19e68c;color:#06120e}
+main{max-width:1200px;margin:auto;padding:18px}
 .page{display:none}
 .page.active{display:block}
-
-h1{
-  margin-top:5px;
-  font-size:25px;
-}
-
-h2{
-  font-size:18px;
-  margin-top:0;
-}
-
+h1{font-size:25px;margin:5px 0 18px}
+h2{font-size:18px}
 .grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
+ display:grid;grid-template-columns:repeat(4,1fr);gap:12px
 }
-
 .grid2{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:14px;
+ display:grid;grid-template-columns:2fr 1fr;gap:14px
 }
-
 .card{
-  background:#0d1b2e;
-  border:1px solid #243a55;
-  border-radius:14px;
-  padding:16px;
-  margin-bottom:15px;
+ background:#0d1b2e;border:1px solid #243a55;
+ border-radius:14px;padding:16px;margin-bottom:15px
 }
-
-.stat{
-  font-size:23px;
-  font-weight:bold;
-  margin-top:8px;
-}
-
-.label{
-  color:#8fa3ba;
-  font-size:13px;
-}
-
+.label{color:#8fa3ba;font-size:13px}
+.stat{font-size:22px;font-weight:bold;margin-top:8px}
 .green{color:#19e68c}
 .red{color:#ff5570}
 .yellow{color:#ffd166}
-
 .watch{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+ display:grid;grid-template-columns:repeat(2,1fr);gap:10px
 }
-
 .stock{
-  background:#101f34;
-  border:1px solid #263e5b;
-  border-radius:10px;
-  padding:12px;
-  cursor:pointer;
+ background:#101f34;border:1px solid #263e5b;
+ border-radius:10px;padding:12px;cursor:pointer
 }
-
-.stock:hover{
-  border-color:#19e68c;
+.stock:hover{border-color:#19e68c}
+.stock-name{font-weight:bold}
+.price{font-size:17px;margin-top:5px}
+.change{font-size:13px;margin-top:4px}
+.chart{
+ height:230px;border-radius:10px;
+ background:
+ linear-gradient(#19314a 1px,transparent 1px),
+ linear-gradient(90deg,#19314a 1px,transparent 1px);
+ background-size:40px 40px;position:relative;overflow:hidden
 }
-
-.stock-name{
-  font-weight:bold;
-}
-
-.price{
-  margin-top:5px;
-  font-size:17px;
-}
-
-.change{
-  font-size:13px;
-  margin-top:4px;
-}
-
-.fake-chart{
-  height:240px;
-  position:relative;
-  overflow:hidden;
-  border-radius:10px;
-  background:
-    linear-gradient(#19314a 1px,transparent 1px),
-    linear-gradient(90deg,#19314a 1px,transparent 1px);
-  background-size:40px 40px;
-}
-
-.chart-line{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:100%;
-}
-
-svg{
-  width:100%;
-  height:100%;
-}
-
+.chart svg{width:100%;height:100%}
 input,select{
-  width:100%;
-  padding:12px;
-  margin:7px 0 13px;
-  background:#091728;
-  color:white;
-  border:1px solid #304a68;
-  border-radius:8px;
-  outline:none;
+ width:100%;padding:12px;margin:7px 0 13px;
+ background:#091728;color:#fff;
+ border:1px solid #304a68;border-radius:8px
 }
-
-input:focus,select:focus{
-  border-color:#19e68c;
-}
-
 .btn{
-  width:100%;
-  border:0;
-  padding:13px;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-  margin-top:5px;
+ width:100%;border:0;padding:13px;
+ border-radius:8px;font-weight:bold;
+ cursor:pointer;margin-top:5px
 }
-
-.buy{
-  background:#19e68c;
-  color:#06120e;
-}
-
-.sell{
-  background:#ff5570;
-  color:white;
-}
-
-.secondary{
-  background:#243852;
-  color:white;
-}
-
+.buy{background:#19e68c;color:#06120e}
+.sell{background:#ff5570;color:white}
+.secondary{background:#243852;color:white}
 .two{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+ display:grid;grid-template-columns:1fr 1fr;gap:8px
 }
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:600px;
-}
-
-.table-wrap{
-  overflow-x:auto;
-}
-
+table{width:100%;border-collapse:collapse;min-width:600px}
+.table-wrap{overflow-x:auto}
 th,td{
-  padding:12px 8px;
-  border-bottom:1px solid #233850;
-  text-align:left;
-  font-size:14px;
+ padding:11px 8px;border-bottom:1px solid #233850;
+ text-align:left;font-size:14px
 }
-
-th{
-  color:#8fa3ba;
-}
-
+th{color:#8fa3ba}
 .message{
-  padding:11px;
-  border-radius:8px;
-  background:#102d25;
-  color:#19e68c;
-  margin-bottom:12px;
-  display:none;
+ display:none;padding:11px;border-radius:8px;
+ background:#102d25;color:#19e68c;margin-bottom:12px
 }
-
-.warning{
-  background:#352b13;
-  color:#ffd166;
-}
-
-.big-price{
-  font-size:30px;
-  font-weight:bold;
-}
-
 footer{
-  text-align:center;
-  color:#71859c;
-  padding:25px;
-  font-size:12px;
+ text-align:center;color:#71859c;
+ padding:25px;font-size:12px
 }
-
 @media(max-width:800px){
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .grid2{
-    grid-template-columns:1fr;
-  }
+ .grid{grid-template-columns:1fr 1fr}
+ .grid2{grid-template-columns:1fr}
 }
-
 @media(max-width:500px){
-  main{padding:12px}
-
-  .grid{
-    grid-template-columns:1fr 1fr;
-    gap:9px;
-  }
-
-  .card{padding:13px}
-
-  .stat{font-size:18px}
-
-  .watch{
-    grid-template-columns:1fr 1fr;
-  }
+ main{padding:12px}
+ .top{align-items:flex-start}
+ .balance{font-size:11px;text-align:right}
+ .logo{font-size:19px}
+ .stat{font-size:18px}
 }
 </style>
 </head>
-<script>
-function showPage(page, button) {
-  document.querySelectorAll(".page").forEach(function(p) {
-    p.classList.remove("active");
-  });
 
-  var selectedPage = document.getElementById(page);
-
-  if (selectedPage) {
-    selectedPage.classList.add("active");
-  }
-
-  document.querySelectorAll("nav button").forEach(function(b) {
-    b.classList.remove("active");
-  });
-
-  if (button) {
-    button.classList.add("active");
-  }
-
-  window.scrollTo(0, 0);
-}
-</script>
 <body>
 
 <header>
-  <div class="top">
-    <div class="logo">SMART TRADE</div>
-    <div class="balance">
-      Virtual Balance: ₹<span id="topBalance">100000</span>
-    </div>
-  </div>
+<div class="top">
+<div class="logo">SMART TRADE</div>
+<div class="balance">
+Virtual Balance: ₹<span id="topBalance">100000</span>
+</div>
+</div>
 
-  <nav>
-    <button class="active" onclick="showPage('dashboard',this)">Dashboard</button>
-    <button onclick="showPage('markets',this)">Markets</button>
-    <button onclick="showPage('trade',this)">Trade</button>
-    <button onclick="showPage('portfolio',this)">Portfolio</button>
-    <button onclick="showPage('orders',this)">Orders</button>
-    <button onclick="showPage('funds',this)">Funds</button>
-    <button onclick="showPage('risk',this)">Risk</button>
-  </nav>
+<nav>
+<button class="active" onclick="showPage('dashboard',this)">Dashboard</button>
+<button onclick="showPage('markets',this)">Markets</button>
+<button onclick="showPage('trade',this)">Trade</button>
+<button onclick="showPage('portfolio',this)">Portfolio</button>
+<button onclick="showPage('orders',this)">Orders</button>
+<button onclick="showPage('funds',this)">Funds</button>
+<button onclick="showPage('risk',this)">Risk</button>
+</nav>
 </header>
 
 <main>
 
 <!-- DASHBOARD -->
 <section id="dashboard" class="page active">
-
 <h1>Trading Dashboard</h1>
 
 <div class="grid">
-
 <div class="card">
 <div class="label">Virtual Balance</div>
 <div class="stat">₹<span id="dashBalance">100000</span></div>
@@ -367,4 +159,131 @@ function showPage(page, button) {
 </div>
 
 <div class="card">
-<div 
+<div class="label">Total Trades</div>
+<div class="stat"><span id="dashTrades">0</span></div>
+</div>
+</div>
+
+<div class="grid2">
+<div class="card">
+<h2>Market Overview</h2>
+<div class="chart">
+<svg viewBox="0 0 600 230" preserveAspectRatio="none">
+<polyline
+points="0,180 50,160 100,175 150,120 200,140 250,90 300,110 350,70 400,95 450,55 500,80 550,35 600,60"
+fill="none" stroke="#19e68c" stroke-width="4"/>
+</svg>
+</div>
+</div>
+
+<div class="card">
+<h2>Quick Trade</h2>
+<p class="label">Select a stock and start paper trading.</p>
+<button class="btn buy" onclick="showPage('trade',null)">OPEN TRADE</button>
+</div>
+</div>
+</section>
+
+<!-- MARKETS -->
+<section id="markets" class="page">
+<h1>Markets</h1>
+
+<div class="card">
+<h2>Indian Stocks</h2>
+<div class="watch" id="marketList"></div>
+</div>
+</section>
+
+<!-- TRADE -->
+<section id="trade" class="page">
+<h1>Trade</h1>
+
+<div id="message" class="message"></div>
+
+<div class="grid2">
+<div class="card">
+<h2>Order Panel</h2>
+
+<label class="label">Stock</label>
+<select id="tradeStock" onchange="updateTradePrice()"></select>
+
+<label class="label">Quantity</label>
+<input id="qty" type="number" min="1" value="1">
+
+<label class="label">Order Type</label>
+<select id="orderType">
+<option>Market</option>
+<option>Limit</option>
+</select>
+
+<label class="label">Price</label>
+<input id="tradePrice" type="number">
+
+<div class="two">
+<button class="btn buy" onclick="placeOrder('BUY')">BUY</button>
+<button class="btn sell" onclick="placeOrder('SELL')">SELL</button>
+</div>
+</div>
+
+<div class="card">
+<h2>Selected Stock</h2>
+<div class="label">Current Price</div>
+<div class="stat">₹<span id="currentPrice">0</span></div>
+<p class="label">Paper trading only</p>
+</div>
+</div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" class="page">
+<h1>Portfolio</h1>
+
+<div class="card">
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Stock</th>
+<th>Qty</th>
+<th>Avg Price</th>
+<th>Current</th>
+<th>Value</th>
+<th>P/L</th>
+</tr>
+</thead>
+<tbody id="portfolioBody"></tbody>
+</table>
+</div>
+</div>
+</section>
+
+<!-- ORDERS -->
+<section id="orders" class="page">
+<h1>Orders</h1>
+
+<div class="card">
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Stock</th>
+<th>Side</th>
+<th>Qty</th>
+<th>Price</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="ordersBody"></tbody>
+</table>
+</div>
+</div>
+</section>
+
+<!-- FUNDS -->
+<section id="funds" class="page">
+<h1>Funds</h1>
+
+<div class="grid">
+<div class="card">
+<div class="label">Available Virtual
