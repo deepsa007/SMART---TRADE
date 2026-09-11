@@ -1,17 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Trade</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Smart Trade</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#07111f;color:#fff}
+nav{padding:18px 20px;background:#0d1b2c;border-bottom:1px solid #24364d;display:flex;justify-content:space-between}
+.logo{font-size:23px;font-weight:bold}.green{color:#31e875}
+nav a{color:#b8c7d9;margin-left:15px;text-decoration:none}
+.hero{padding:60px 20px;text-align:center;max-width:1000px;margin:auto}
+.badge{color:#31e875;background:#0d291a;padding:8px 14px;border-radius:20px}
+h1{font-size:48px;margin:20px 0 10px}
+h1 span{color:#31e875}
+.hero p{color:#aebdd0;font-size:18px}
+.btn{display:inline-block;margin:15px 5px;padding:13px 20px;border-radius:10px;text-decoration:none;font-weight:bold}
+.primary{background:#31e875;color:#06120a}
+.secondary{background:#13243a;color:white;border:1px solid #29415d}
+section{max-width:1000px;margin:auto;padding:45px 20px}
+h2{font-size:30px}
+.sub{color:#91a5bd}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:#0d1b2c;border:1px solid #20364f;border-radius:15px;padding:22px}
+.card h3{margin-top:5px}.card p{color:#9eb0c5}
+.icon{font-size:30px}
+.lesson{background:#0d1b2c;border:1px solid #20364f;border-radius:12px;padding:18px;margin:12px 0}
+.lesson b{font-size:17px}
+.risk{background:#251d0c;border:1px solid #76551d;padding:20px;border-radius:15px}
+footer{text-align:center;padding:30px;color:#71849b;border-top:1px solid #1d2d42}
+@media(max-width:700px){
+h1{font-size:40px}.cards{grid-template-columns:1fr}
+nav a{display:none}
+}
+</style>
 </head>
+
 <body>
 
-  <h1>Smart Trade</h1>
-  <p>Trading सीखने के लिए simple website</p>
+<nav>
+<div class="logo">SMART <span class="green">TRADE</span></div>
+<div>
+<a href="#learn">Learn</a>
+<a href="#practice">Practice</a>
+<a href="#risk">Risk</a>
+</div>
+</nav>
 
-  <h2>Welcome</h2>
-  <p>Yahan trading ke basics, charts aur learning resources milenge.</p>
+<div class="hero">
+<span class="badge">📈 Trading Learning Platform</span>
+<h1>Learn Trading.<br><span>Practice Smart.</span></h1>
+<p>Trading ke basics seekho, charts samjho aur bina real money risk kiye paper trading practice karo.</p>
+<a class="btn primary" href="#learn">Start Learning →</a>
+<a class="btn secondary" href="#practice">Paper Trading</a>
+</div>
+
+<section id="learn">
+<h2>📚 Learn Trading Basics</h2>
+<p class="sub">Beginner-friendly lessons — simple language mein.</p>
+
+<div class="lesson">🕯️ <b>Candlestick</b><br>
+<span class="sub">Open, High, Low aur Close samjho.</span></div>
+
+<div class="lesson">📏 <b>Support & Resistance</b><br>
+<span class="sub">Important price levels identify karna seekho.</span></div>
+
+<div class="lesson">📈 <b>Trend</b><br>
+<span class="sub">Uptrend, Downtrend aur Sideways market.</span></div>
+
+<div class="lesson">🛑 <b>Stop Loss</b><br>
+<span class="sub">Loss ko control karna seekho.</span></div>
+</section>
+
+<section id="practice">
+<h2>🧪 Paper Trading</h2>
+<p class="sub">Real money ke bina trading practice karo.</p>
+
+<div class="cards">
+<div class="card">
+<div class="icon">💰</div>
+<h3>Virtual Balance</h3>
+<p>₹1,00,000 demo money se practice.</p>
+</div>
+
+<div class="card">
+<div class="icon">🟢</div>
+<h3>Buy / Sell</h3>
+<p>Entry aur exit decisions practice karo.</p>
+</div>
+
+<div class="card">
+<div class="icon">📊</div>
+<h3>Profit / Loss</h3>
+<p>Apne trades ka performance track karo.</p>
+</div>
+</div>
+</section>
+
+<section id="risk">
+<h2>⚠️ Risk Management</h2>
+<p class="sub">Trading mein capital protection bahut important hai.</p>
+<div class="risk">
+<b>Golden Rule:</b>
+<p>Kisi bhi trade mein bina plan ke entry mat lo. Stop Loss, Position Size aur Risk/Reward ko samajhna zaroori hai.</p>
+</div>
+</section>
+
+<section>
+<h2>🚀 Coming Next</h2>
+<div class="cards">
+<div class="card">
+<div class="icon">📊</div>
+<h3>Interactive Charts</h3>
+<p>Better charts aur multiple timeframes.</p>
+</div>
+<div class="card">
+<div class="icon">💼</div>
+<h3>Portfolio</h3>
+<p>Virtual holdings aur P&L tracking.</p>
+</div>
+<div class="card">
+<div class="icon">📝</div>
+<h3>Trading Journal</h3>
+<p>Trades aur notes save karo.</p>
+</div>
+</div>
+</section>
+
+<footer>
+© 2026 Smart Trade · Educational & Paper Trading Project<br>
+Not financial advice
+</footer>
 
 </body>
 </html>
