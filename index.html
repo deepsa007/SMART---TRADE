@@ -1,963 +1,348 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Smart Trade Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART TRADE</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#07152f;
- color:white;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#07111f;
+  color:#fff;
 }
+
+header{
+  background:#0b1728;
+  border-bottom:1px solid #263b55;
+  padding:15px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.top{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:bold;
+  color:#19e68c;
+}
+
+.balance{
+  font-size:14px;
+  color:#b9c7d8;
+}
+
 nav{
- position:sticky;
- top:0;
- z-index:10;
- background:#0d1b3a;
- border-bottom:1px solid #263b70;
- padding:15px 20px;
- display:flex;
- align-items:center;
- justify-content:space-between;
+  max-width:1200px;
+  margin:12px auto 0;
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
 }
-.logo{font-size:24px;font-weight:bold}
-.green{color:#31e875}
-nav a{
- color:#b8c7d9;
- text-decoration:none;
- margin-left:18px;
- cursor:pointer;
+
+nav button{
+  border:0;
+  background:#14243a;
+  color:#d9e4f2;
+  padding:10px 14px;
+  border-radius:8px;
+  white-space:nowrap;
+  cursor:pointer;
 }
-.container{
- max-width:1100px;
- margin:auto;
- padding:25px 16px;
+
+nav button.active,
+nav button:hover{
+  background:#19e68c;
+  color:#06120e;
 }
-.hero{
- padding:20px 0;
+
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:18px;
 }
-.hero h1{font-size:34px;margin:5px 0}
-.hero p{color:#aebdd5}
+
+.page{display:none}
+.page.active{display:block}
+
+h1{
+  margin-top:5px;
+  font-size:25px;
+}
+
+h2{
+  font-size:18px;
+  margin-top:0;
+}
+
 .grid{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:15px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
 }
+
+.grid2{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:14px;
+}
+
 .card{
- background:#0d1b3a;
- border:1px solid #263b70;
- border-radius:16px;
- padding:20px;
- box-shadow:0 5px 20px #0003;
+  background:#0d1b2e;
+  border:1px solid #243a55;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:15px;
 }
-.label{color:#9daecc;font-size:14px}
-.value{
- font-size:25px;
- font-weight:bold;
- margin-top:8px;
+
+.stat{
+  font-size:23px;
+  font-weight:bold;
+  margin-top:8px;
 }
-.profit{color:#31e875}
-.loss{color:#ff5b6e}
-.section-title{
- margin:30px 0 14px;
- font-size:23px;
+
+.label{
+  color:#8fa3ba;
+  font-size:13px;
 }
-.two{
- display:grid;
- grid-template-columns:2fr 1fr;
- gap:15px;
+
+.green{color:#19e68c}
+.red{color:#ff5570}
+.yellow{color:#ffd166}
+
+.watch{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
 }
-.watch-item,.position,.history{
- display:flex;
- justify-content:space-between;
- align-items:center;
- padding:14px 0;
- border-bottom:1px solid #263b70;
+
+.stock{
+  background:#101f34;
+  border:1px solid #263e5b;
+  border-radius:10px;
+  padding:12px;
+  cursor:pointer;
 }
-.watch-item:last-child,.position:last-child,.history:last-child{
- border-bottom:0;
+
+.stock:hover{
+  border-color:#19e68c;
 }
-.symbol{font-weight:bold}
-.price{font-size:18px}
-button{
- border:0;
- border-radius:9px;
- padding:10px 16px;
- font-weight:bold;
- cursor:pointer;
+
+.stock-name{
+  font-weight:bold;
 }
-.buy{background:#31e875;color:#06120a}
-.sell{background:#ff5b6e;color:white}
-.blue{background:#536dfe;color:white}
-.reset{background:#273d72;color:white}
+
+.price{
+  margin-top:5px;
+  font-size:17px;
+}
+
+.change{
+  font-size:13px;
+  margin-top:4px;
+}
+
+.fake-chart{
+  height:240px;
+  position:relative;
+  overflow:hidden;
+  border-radius:10px;
+  background:
+    linear-gradient(#19314a 1px,transparent 1px),
+    linear-gradient(90deg,#19314a 1px,transparent 1px);
+  background-size:40px 40px;
+}
+
+.chart-line{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:100%;
+}
+
+svg{
+  width:100%;
+  height:100%;
+}
+
 input,select{
- width:100%;
- padding:12px;
- margin:8px 0 12px;
- border-radius:9px;
- border:1px solid #40558b;
- background:#081633;
- color:white;
- outline:none;
+  width:100%;
+  padding:12px;
+  margin:7px 0 13px;
+  background:#091728;
+  color:white;
+  border:1px solid #304a68;
+  border-radius:8px;
+  outline:none;
 }
-.trade-buttons{
- display:flex;
- gap:10px;
+
+input:focus,select:focus{
+  border-color:#19e68c;
 }
-.trade-buttons button{flex:1}
-canvas{
- width:100%;
- height:280px;
- background:#091735;
- border-radius:12px;
+
+.btn{
+  width:100%;
+  border:0;
+  padding:13px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:5px;
 }
+
+.buy{
+  background:#19e68c;
+  color:#06120e;
+}
+
+.sell{
+  background:#ff5570;
+  color:white;
+}
+
+.secondary{
+  background:#243852;
+  color:white;
+}
+
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
 table{
- width:100%;
- border-collapse:collapse;
+  width:100%;
+  border-collapse:collapse;
+  min-width:600px;
 }
+
+.table-wrap{
+  overflow-x:auto;
+}
+
 th,td{
- text-align:left;
- padding:13px 8px;
- border-bottom:1px solid #263b70;
+  padding:12px 8px;
+  border-bottom:1px solid #233850;
+  text-align:left;
+  font-size:14px;
 }
-th{color:#9daecc}
-.badge{
- display:inline-block;
- padding:5px 9px;
- border-radius:20px;
- background:#15345c;
- color:#31e875;
- font-size:12px;
+
+th{
+  color:#8fa3ba;
 }
+
+.message{
+  padding:11px;
+  border-radius:8px;
+  background:#102d25;
+  color:#19e68c;
+  margin-bottom:12px;
+  display:none;
+}
+
+.warning{
+  background:#352b13;
+  color:#ffd166;
+}
+
+.big-price{
+  font-size:30px;
+  font-weight:bold;
+}
+
 footer{
- text-align:center;
- color:#7183a5;
- padding:35px;
+  text-align:center;
+  color:#71859c;
+  padding:25px;
+  font-size:12px;
 }
+
 @media(max-width:800px){
- .grid{grid-template-columns:repeat(2,1fr)}
- .two{grid-template-columns:1fr}
- nav{padding:13px}
- nav a{margin-left:8px;font-size:13px}
- .hero h1{font-size:28px}
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .grid2{
+    grid-template-columns:1fr;
+  }
 }
+
 @media(max-width:500px){
- .grid{grid-template-columns:1fr}
- .watch-item{gap:10px}
- .container{padding:18px 12px}
+  main{padding:12px}
+
+  .grid{
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+  }
+
+  .card{padding:13px}
+
+  .stat{font-size:18px}
+
+  .watch{
+    grid-template-columns:1fr 1fr;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<nav>
- <div class="logo">SMART <span class="green">TRADE</span></div>
- <div>
-  <a onclick="scrollToId('dashboard')">Dashboard</a>
-  <a onclick="scrollToId('trade')">Trade</a>
-  <a onclick="scrollToId('portfolio')">Portfolio</a>
-  <a onclick="scrollToId('risk')">Risk</a>
- </div>
-</nav>
+<header>
+  <div class="top">
+    <div class="logo">SMART TRADE</div>
+    <div class="balance">
+      Virtual Balance: ₹<span id="topBalance">100000</span>
+    </div>
+  </div>
 
-<div class="container">
+  <nav>
+    <button class="active" onclick="showPage('dashboard',this)">Dashboard</button>
+    <button onclick="showPage('markets',this)">Markets</button>
+    <button onclick="showPage('trade',this)">Trade</button>
+    <button onclick="showPage('portfolio',this)">Portfolio</button>
+    <button onclick="showPage('orders',this)">Orders</button>
+    <button onclick="showPage('funds',this)">Funds</button>
+    <button onclick="showPage('risk',this)">Risk</button>
+  </nav>
+</header>
 
-<section class="hero" id="dashboard">
- <div class="badge">📊 PAPER TRADING DASHBOARD</div>
- <h1>Trading Dashboard</h1>
- <p>Real money ke bina practice karo aur apni trading skills improve karo.</p>
-</section>
+<main>
 
-<!-- SUMMARY -->
+<!-- DASHBOARD -->
+<section id="dashboard" class="page active">
+
+<h1>Trading Dashboard</h1>
+
 <div class="grid">
 
- <div class="card">
-  <div class="label">Virtual Balance</div>
-  <div class="value" id="balance">₹1,00,000</div>
- </div>
-
- <div class="card">
-  <div class="label">Portfolio Value</div>
-  <div class="value" id="portfolioValue">₹0</div>
- </div>
-
- <div class="card">
-  <div class="label">Total P/L</div>
-  <div class="value profit" id="totalPL">₹0</div>
- </div>
-
- <div class="card">
-  <div class="label">Trades</div>
-  <div class="value" id="tradeCount">0</div>
- </div>
-
+<div class="card">
+<div class="label">Virtual Balance</div>
+<div class="stat">₹<span id="dashBalance">100000</span></div>
 </div>
-
-<!-- CHART + WATCHLIST -->
-<div class="two">
-
- <div class="card" style="margin-top:20px">
-  <h2>📈 Market Chart</h2>
-  <p class="label">Simulated market price</p>
-  <canvas id="chart"></canvas>
- </div>
-
- <div class="card" style="margin-top:20px">
-  <h2>⭐ Watchlist</h2>
-
-  <div class="watch-item">
-   <div>
-    <div class="symbol">RELIANCE</div>
-    <div class="label">NSE</div>
-   </div>
-   <div class="price">₹2,940</div>
-  </div>
-
-  <div class="watch-item">
-   <div>
-    <div class="symbol">TCS</div>
-    <div class="label">NSE</div>
-   </div>
-   <div class="price">₹3,480</div>
-  </div>
-
-  <div class="watch-item">
-   <div>
-    <div class="symbol">INFY</div>
-    <div class="label">NSE</div>
-   </div>
-   <div class="price">₹1,520</div>
-  </div>
-
-  <div class="watch-item">
-   <div>
-    <div class="symbol">HDFCBANK</div>
-    <div class="label">NSE</div>
-   </div>
-   <div class="price">₹1,760</div>
-  </div>
-
- </div>
-</div>
-
-<!-- TRADE -->
-<h2 class="section-title" id="trade">💹 Buy / Sell</h2>
-
-<div class="two">
-
- <div class="card">
-  <h2>Place Paper Trade</h2>
-
-  <label class="label">Select Stock</label>
-  <select id="stock">
-   <option value="RELIANCE">RELIANCE — ₹2940</option>
-   <option value="TCS">TCS — ₹3480</option>
-   <option value="INFY">INFY — ₹1520</option>
-   <option value="HDFCBANK">HDFCBANK — ₹1760</option>
-  </select>
-
-  <label class="label">Quantity</label>
-  <input id="quantity" type="number" min="1" value="1">
-
-  <div class="trade-buttons">
-   <button class="buy" onclick="buyStock()">BUY</button>
-   <button class="sell" onclick="sellStock()">SELL</button>
-  </div>
-
-  <p id="message" class="label" style="margin-top:15px">
-   Trade karne ke liye quantity enter karo.
-  </p>
- </div>
-
- <div class="card">
-  <h2>💰 Current Market</h2>
-  <div class="label">Selected Stock</div>
-  <div class="value" id="currentStock">RELIANCE</div>
-
-  <div class="label" style="margin-top:18px">Price</div>
-  <div class="value profit" id="currentPrice">₹2,940</div>
- </div>
-
-</div>
-
-<!-- PORTFOLIO -->
-<h2 class="section-title" id="portfolio">📊 Your Portfolio</h2>
 
 <div class="card">
- <table>
-  <thead>
-   <tr>
-    <th>Stock</th>
-    <th>Qty</th>
-    <th>Avg Price</th>
-    <th>Current</th>
-    <th>P/L</th>
-   </tr>
-  </thead>
-  <tbody id="portfolioTable">
-   <tr>
-    <td colspan="5" class="label">Abhi koi position nahi hai.</td>
-   </tr>
-  </tbody>
- </table>
+<div class="label">Portfolio Value</div>
+<div class="stat">₹<span id="dashPortfolio">0</span></div>
 </div>
-
-<!-- HISTORY -->
-<h2 class="section-title">🧾 Trade History</h2>
 
 <div class="card">
- <div id="history">
-  <p class="label">Abhi koi trade nahi hua.</p>
- </div>
+<div class="label">Total P/L</div>
+<div class="stat" id="dashPL">₹0</div>
 </div>
 
-<!-- RISK -->
-<h2 class="section-title" id="risk">⚠️ Risk Calculator</h2>
-
-<div class="two">
-
- <div class="card">
-  <h2>Risk Management</h2>
-
-  <label class="label">Trading Capital</label>
-  <input id="capital" type="number" value="100000">
-
-  <label class="label">Risk % per Trade</label>
-  <input id="riskPercent" type="number" value="1" min="0.1" max="100">
-
-  <label class="label">Entry Price</label>
-  <input id="entry" type="number" value="2940">
-
-  <label class="label">Stop Loss Price</label>
-  <input id="stop" type="number" value="2880">
-
-  <button class="blue" onclick="calculateRisk()">Calculate Risk</button>
- </div>
-
- <div class="card">
-  <h2>Risk Result</h2>
-
-  <div class="label">Maximum Risk</div>
-  <div class="value loss" id="maxRisk">₹1,000</div>
-
-  <div class="label" style="margin-top:18px">Risk per Share</div>
-  <div class="value" id="riskShare">₹60</div>
-
-  <div class="label" style="margin-top:18px">Suggested Quantity</div>
-  <div class="value profit" id="riskQty">16</div>
- </div>
-
-</div>
-
-<!-- RESET -->
-<div class="card" style="margin-top:25px;text-align:center">
- <h2>Practice Account</h2>
- <p class="label">Saare paper trades aur positions reset karne ke liye.</p>
- <button class="reset" onclick="resetAccount()">Reset Practice Account</button>
-</div>
-
-</div>
-
-<footer>
- Smart Trade — Educational Paper Trading Platform<br>
- <small>Simulated trading only. No real money or real-time orders.</small>
-</footer>
-
-
-<script>
-
-/* =========================
-   MARKET DATA
-========================= */
-
-const prices = {
- RELIANCE:2940,
- TCS:3480,
- INFY:1520,
- HDFCBANK:1760
-};
-
-let balance = 100000;
-let positions = {};
-let history = [];
-let trades = 0;
-
-
-/* =========================
-   HELPERS
-========================= */
-
-function money(value){
- return "₹" + Math.round(value).toLocaleString("en-IN");
-}
-
-function scrollToId(id){
- document.getElementById(id).scrollIntoView({
-  behavior:"smooth"
- });
-}
-
-function getSelected(){
- return document.getElementById("stock").value;
-}
-
-function updateSelectedPrice(){
-
- const stock = getSelected();
-
- document.getElementById("currentStock").innerText = stock;
-
- document.getElementById("currentPrice").innerText =
- money(prices[stock]);
-}
-
-document.getElementById("stock").addEventListener(
- "change",
- updateSelectedPrice
-);
-
-
-/* =========================
-   BUY
-========================= */
-
-function buyStock(){
-
- const stock = getSelected();
-
- const qty = Number(
-  document.getElementById("quantity").value
- );
-
- if(!qty || qty < 1){
-  showMessage("Quantity sahi enter karo.","loss");
-  return;
- }
-
- const price = prices[stock];
- const cost = price * qty;
-
- if(cost > balance){
-  showMessage("❌ Balance insufficient hai.","loss");
-  return;
- }
-
- balance -= cost;
-
- if(!positions[stock]){
-  positions[stock] = {
-   qty:0,
-   avg:0
-  };
- }
-
- const oldQty = positions[stock].qty;
- const oldAvg = positions[stock].avg;
-
- const newQty = oldQty + qty;
-
- positions[stock].avg =
-  ((oldQty * oldAvg) + (qty * price)) / newQty;
-
- positions[stock].qty = newQty;
-
- trades++;
-
- history.unshift({
-  type:"BUY",
-  stock:stock,
-  qty:qty,
-  price:price,
-  time:new Date().toLocaleTimeString()
- });
-
- showMessage(
-  `✅ BUY successful: ${qty} ${stock} @ ${money(price)}`,
-  "profit"
- );
-
- updateAll();
-}
-
-
-/* =========================
-   SELL
-========================= */
-
-function sellStock(){
-
- const stock = getSelected();
-
- const qty = Number(
-  document.getElementById("quantity").value
- );
-
- if(!qty || qty < 1){
-  showMessage("Quantity sahi enter karo.","loss");
-  return;
- }
-
- if(!positions[stock] ||
-    positions[stock].qty < qty){
-
-  showMessage(
-   "❌ Itni quantity aapke portfolio me nahi hai.",
-   "loss"
-  );
-
-  return;
- }
-
- const price = prices[stock];
- const revenue = price * qty;
-
- balance += revenue;
-
- positions[stock].qty -= qty;
-
- if(positions[stock].qty === 0){
-  delete positions[stock];
- }
-
- trades++;
-
- history.unshift({
-  type:"SELL",
-  stock:stock,
-  qty:qty,
-  price:price,
-  time:new Date().toLocaleTimeString()
- });
-
- showMessage(
-  `✅ SELL successful: ${qty} ${stock} @ ${money(price)}`,
-  "profit"
- );
-
- updateAll();
-}
-
-
-/* =========================
-   MESSAGE
-========================= */
-
-function showMessage(text,type){
-
- const el = document.getElementById("message");
-
- el.innerText = text;
-
- el.className =
-  type === "loss" ? "label loss" : "label profit";
-}
-
-
-/* =========================
-   PORTFOLIO
-========================= */
-
-function calculatePortfolio(){
-
- let value = 0;
- let pl = 0;
-
- Object.keys(positions).forEach(stock=>{
-
-  const p = positions[stock];
-
-  const current = prices[stock];
-
-  value += p.qty * current;
-
-  pl += p.qty * (current - p.avg);
-
- });
-
- return {
-  value:value,
-  pl:pl
- };
-}
-
-
-function updatePortfolio(){
-
- const table =
-  document.getElementById("portfolioTable");
-
- const keys = Object.keys(positions);
-
- if(keys.length === 0){
-
-  table.innerHTML =
-   `<tr>
-    <td colspan="5" class="label">
-     Abhi koi position nahi hai.
-    </td>
-   </tr>`;
-
-  return;
- }
-
- table.innerHTML = "";
-
- keys.forEach(stock=>{
-
-  const p = positions[stock];
-
-  const current = prices[stock];
-
-  const pl =
-   p.qty * (current - p.avg);
-
-  const tr =
-   document.createElement("tr");
-
-  tr.innerHTML = `
-   <td><b>${stock}</b></td>
-   <td>${p.qty}</td>
-   <td>${money(p.avg)}</td>
-   <td>${money(current)}</td>
-   <td class="${pl >= 0 ? "profit":"loss"}">
-    ${money(pl)}
-   </td>
-  `;
-
-  table.appendChild(tr);
- });
-}
-
-
-/* =========================
-   HISTORY
-========================= */
-
-function updateHistory(){
-
- const el =
-  document.getElementById("history");
-
- if(history.length === 0){
-
-  el.innerHTML =
-   `<p class="label">
-    Abhi koi trade nahi hua.
-   </p>`;
-
-  return;
- }
-
- el.innerHTML = "";
-
- history.slice(0,10).forEach(item=>{
-
-  const row =
-   document.createElement("div");
-
-  row.className = "history";
-
-  row.innerHTML = `
-   <div>
-    <b class="${item.type === "BUY" ? "profit":"loss"}">
-     ${item.type}
-    </b>
-    ${item.stock}
-   </div>
-
-   <div>
-    ${item.qty} × ${money(item.price)}
-   </div>
-
-   <div class="label">
-    ${item.time}
-   </div>
-  `;
-
-  el.appendChild(row);
- });
-}
-
-
-/* =========================
-   DASHBOARD UPDATE
-========================= */
-
-function updateAll(){
-
- const portfolio =
-  calculatePortfolio();
-
- document.getElementById("balance")
-  .innerText = money(balance);
-
- document.getElementById("portfolioValue")
-  .innerText = money(portfolio.value);
-
- const plEl =
-  document.getElementById("totalPL");
-
- plEl.innerText =
-  money(portfolio.pl);
-
- plEl.className =
-  "value " +
-  (portfolio.pl >= 0 ? "profit":"loss");
-
- document.getElementById("tradeCount")
-  .innerText = trades;
-
- updatePortfolio();
- updateHistory();
-}
-
-
-/* =========================
-   RISK CALCULATOR
-========================= */
-
-function calculateRisk(){
-
- const capital =
-  Number(document.getElementById("capital").value);
-
- const percent =
-  Number(document.getElementById("riskPercent").value);
-
- const entry =
-  Number(document.getElementById("entry").value);
-
- const stop =
-  Number(document.getElementById("stop").value);
-
- if(capital <= 0 ||
-    percent <= 0 ||
-    entry <= 0 ||
-    stop <= 0){
-
-  alert("Please correct values enter karo.");
-  return;
- }
-
- const maxRisk =
-  capital * percent / 100;
-
- const riskShare =
-  Math.abs(entry - stop);
-
- const qty =
-  riskShare > 0
-  ? Math.floor(maxRisk / riskShare)
-  : 0;
-
- document.getElementById("maxRisk")
-  .innerText = money(maxRisk);
-
- document.getElementById("riskShare")
-  .innerText = money(riskShare);
-
- document.getElementById("riskQty")
-  .innerText = qty;
-}
-
-
-/* =========================
-   RESET
-========================= */
-
-function resetAccount(){
-
- const ok =
-  confirm(
-   "Kya aap poora paper trading account reset karna chahte hain?"
-  );
-
- if(!ok) return;
-
- balance = 100000;
- positions = {};
- history = [];
- trades = 0;
-
- updateAll();
-
- showMessage(
-  "Practice account reset ho gaya.",
-  "profit"
- );
-}
-
-
-/* =========================
-   SIMULATED MARKET
-========================= */
-
-function simulateMarket(){
-
- Object.keys(prices).forEach(stock=>{
-
-  const movement =
-   (Math.random() - 0.5) * 10;
-
-  prices[stock] =
-   Math.max(
-    100,
-    Math.round(prices[stock] + movement)
-   );
-
- });
-
- updateSelectedPrice();
- updateAll();
- drawChart();
-}
-
-
-/* =========================
-   CHART
-========================= */
-
-const canvas =
- document.getElementById("chart");
-
-const ctx =
- canvas.getContext("2d");
-
-let chartData = [];
-
-for(let i=0;i<35;i++){
-
- chartData.push(
-  2940 + (Math.random()-0.5)*200
- );
-}
-
-
-function drawChart(){
-
- const rect =
-  canvas.getBoundingClientRect();
-
- canvas.width = rect.width * devicePixelRatio;
- canvas.height = 280 * devicePixelRatio;
-
- ctx.scale(
-  devicePixelRatio,
-  devicePixelRatio
- );
-
- const width = rect.width;
- const height = 280;
-
- ctx.clearRect(0,0,width,height);
-
- const min =
-  Math.min(...chartData) - 20;
-
- const max =
-  Math.max(...chartData) + 20;
-
- /* grid */
-
- ctx.strokeStyle = "#263b70";
- ctx.lineWidth = 1;
-
- for(let i=1;i<5;i++){
-
-  const y =
-   (height/5)*i;
-
-  ctx.beginPath();
-  ctx.moveTo(0,y);
-  ctx.lineTo(width,y);
-  ctx.stroke();
- }
-
- /* line */
-
- ctx.beginPath();
-
- chartData.forEach((value,i)=>{
-
-  const x =
-   (i/(chartData.length-1))*width;
-
-  const y =
-   height -
-   ((value-min)/(max-min))*height;
-
-  if(i===0)
-   ctx.moveTo(x,y);
-  else
-   ctx.lineTo(x,y);
-
- });
-
- ctx.strokeStyle = "#31e875";
- ctx.lineWidth = 3;
- ctx.stroke();
-
- /* current price */
-
- const last =
-  chartData[chartData.length-1];
-
- const y =
-  height -
-  ((last-min)/(max-min))*height;
-
- ctx.fillStyle = "#31e875";
-
- ctx.beginPath();
- ctx.arc(width-3,y,5,0,Math.PI*2);
- ctx.fill();
-}
-
-
-window.addEventListener(
- "resize",
- drawChart
-);
-
-
-/* =========================
-   START
-========================= */
-
-updateSelectedPrice();
-updateAll();
-calculateRisk();
-drawChart();
-
-setInterval(()=>{
-
- const selected =
-  getSelected();
-
- const newPrice =
-  prices[selected] +
-  Math.round((Math.random()-0.5)*20);
-
- prices[selected] =
-  Math.max(100, newPrice);
-
- chartData.push(prices[selected]);
-
- if(chartData.length > 35)
-  chartData.shift();
-
- updateSelectedPrice();
- updateAll();
- drawChart();
-
-},3000);
-
-</script>
-
-</body>
-</html>
+<div class="card">
+<div
