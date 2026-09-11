@@ -298,7 +298,29 @@ footer{
 }
 </style>
 </head>
+<script>
+function showPage(page, button) {
+  document.querySelectorAll(".page").forEach(function(p) {
+    p.classList.remove("active");
+  });
 
+  var selectedPage = document.getElementById(page);
+
+  if (selectedPage) {
+    selectedPage.classList.add("active");
+  }
+
+  document.querySelectorAll("nav button").forEach(function(b) {
+    b.classList.remove("active");
+  });
+
+  if (button) {
+    button.classList.add("active");
+  }
+
+  window.scrollTo(0, 0);
+}
+</script>
 <body>
 
 <header>
@@ -345,4 +367,4 @@ footer{
 </div>
 
 <div class="card">
-<div
+<div 
