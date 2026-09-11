@@ -4,34 +4,132 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Smart Trade</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#07111f;color:#fff}
-nav{padding:18px 20px;background:#0d1b2c;border-bottom:1px solid #24364d;display:flex;justify-content:space-between}
-.logo{font-size:23px;font-weight:bold}.green{color:#31e875}
-nav a{color:#b8c7d9;margin-left:15px;text-decoration:none}
-.hero{padding:60px 20px;text-align:center;max-width:1000px;margin:auto}
-.badge{color:#31e875;background:#0d291a;padding:8px 14px;border-radius:20px}
-h1{font-size:48px;margin:20px 0 10px}
-h1 span{color:#31e875}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#07152f;
+ color:white;
+}
+nav{
+ padding:16px 20px;
+ background:#0d1b3a;
+ border-bottom:1px solid #263f70;
+ position:sticky;
+ top:0;
+ z-index:10;
+}
+.logo{font-size:24px;font-weight:bold}
+.logo span,h1 span{color:#31e875}
+nav a{
+ color:#b8c7d9;
+ margin-left:15px;
+ text-decoration:none;
+}
+.hero{
+ padding:55px 20px;
+ text-align:center;
+ max-width:1000px;
+ margin:auto;
+}
+.badge{
+ display:inline-block;
+ color:#31e875;
+ background:#0d291a;
+ padding:10px 16px;
+ border-radius:25px;
+}
+h1{font-size:42px;margin:20px 0 10px}
 .hero p{color:#aebdd0;font-size:18px}
-.btn{display:inline-block;margin:15px 5px;padding:13px 20px;border-radius:10px;text-decoration:none;font-weight:bold}
+.btn{
+ display:inline-block;
+ padding:13px 22px;
+ margin:12px 5px;
+ border:0;
+ border-radius:10px;
+ cursor:pointer;
+ font-weight:bold;
+ text-decoration:none;
+}
 .primary{background:#31e875;color:#06120a}
-.secondary{background:#13243a;color:white;border:1px solid #29415d}
-section{max-width:1000px;margin:auto;padding:45px 20px}
+.secondary{background:#243f78;color:white}
+section{
+ max-width:1000px;
+ margin:auto;
+ padding:35px 20px;
+}
 h2{font-size:30px}
 .sub{color:#91a5bd}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{background:#0d1b2c;border:1px solid #20364f;border-radius:15px;padding:22px}
-.card h3{margin-top:5px}.card p{color:#9eb0c5}
-.icon{font-size:30px}
-.lesson{background:#0d1b2c;border:1px solid #20364f;border-radius:12px;padding:18px;margin:12px 0}
-.lesson b{font-size:17px}
-.risk{background:#251d0c;border:1px solid #76551d;padding:20px;border-radius:15px}
-footer{text-align:center;padding:30px;color:#71849b;border-top:1px solid #1d2d42}
-@media(max-width:700px){
-h1{font-size:40px}.cards{grid-template-columns:1fr}
-nav a{display:none}
+.cards{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+ gap:15px;
+}
+.card{
+ background:#0d234d;
+ border:1px solid #294b82;
+ border-radius:15px;
+ padding:20px;
+ box-shadow:0 5px 20px #0003;
+}
+.card h3{margin-top:5px}
+.card p{color:#b8c7d9}
+#paper{
+ background:#091c40;
+}
+.balance{
+ font-size:30px;
+ color:#31e875;
+ font-weight:bold;
+}
+.tradebox{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:15px;
+}
+input,select{
+ width:100%;
+ padding:12px;
+ margin:7px 0;
+ border-radius:8px;
+ border:1px solid #41669f;
+ background:#07152f;
+ color:white;
+}
+.buy{background:#31e875;color:#06120a}
+.sell{background:#ff5570;color:white}
+button{cursor:pointer}
+#chart{
+ width:100%;
+ height:230px;
+ background:#07152f;
+ border-radius:12px;
+ border:1px solid #294b82;
+}
+.stat{
+ display:flex;
+ justify-content:space-between;
+ padding:10px 0;
+ border-bottom:1px solid #29405f;
+}
+.profit{color:#31e875}
+.loss{color:#ff5570}
+.warning{
+ background:#49351d;
+ border:1px solid #d99a31;
+ padding:20px;
+ border-radius:15px;
+}
+footer{
+ text-align:center;
+ padding:30px;
+ color:#8095b0;
+}
+@media(max-width:650px){
+ h1{font-size:34px}
+ .tradebox{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -39,98 +137,304 @@ nav a{display:none}
 <body>
 
 <nav>
-<div class="logo">SMART <span class="green">TRADE</span></div>
-<div>
-<a href="#learn">Learn</a>
-<a href="#practice">Practice</a>
-<a href="#risk">Risk</a>
-</div>
+ <div class="logo">SMART <span>TRADE</span></div>
+ <a href="#learn">Learn</a>
+ <a href="#paper">Paper Trading</a>
+ <a href="#risk">Risk</a>
 </nav>
 
 <div class="hero">
-<span class="badge">📈 Trading Learning Platform</span>
-<h1>Learn Trading.<br><span>Practice Smart.</span></h1>
-<p>Trading ke basics seekho, charts samjho aur bina real money risk kiye paper trading practice karo.</p>
-<a class="btn primary" href="#learn">Start Learning →</a>
-<a class="btn secondary" href="#practice">Paper Trading</a>
+ <div class="badge">📈 Trading Learning Platform</div>
+
+ <h1>Learn Trading.<br>
+ <span>Practice Smart.</span></h1>
+
+ <p>
+ Trading ke basics seekho, charts samjho aur bina real money
+ risk kiye paper trading practice karo.
+ </p>
+
+ <a class="btn primary" href="#learn">Start Learning →</a>
+ <a class="btn secondary" href="#paper">Paper Trading</a>
 </div>
 
 <section id="learn">
-<h2>📚 Learn Trading Basics</h2>
-<p class="sub">Beginner-friendly lessons — simple language mein.</p>
+ <h2>📚 Learn Trading Basics</h2>
+ <p class="sub">Beginner-friendly lessons — simple language mein.</p>
 
-<div class="lesson">🕯️ <b>Candlestick</b><br>
-<span class="sub">Open, High, Low aur Close samjho.</span></div>
+ <div class="cards">
+  <div class="card">
+   <h3>🕯️ Candlestick</h3>
+   <p>Open, High, Low aur Close ko samjho.</p>
+  </div>
 
-<div class="lesson">📏 <b>Support & Resistance</b><br>
-<span class="sub">Important price levels identify karna seekho.</span></div>
+  <div class="card">
+   <h3>📏 Support & Resistance</h3>
+   <p>Price ke important levels identify karna seekho.</p>
+  </div>
 
-<div class="lesson">📈 <b>Trend</b><br>
-<span class="sub">Uptrend, Downtrend aur Sideways market.</span></div>
+  <div class="card">
+   <h3>📊 Trend</h3>
+   <p>Uptrend, downtrend aur sideways market samjho.</p>
+  </div>
 
-<div class="lesson">🛑 <b>Stop Loss</b><br>
-<span class="sub">Loss ko control karna seekho.</span></div>
+  <div class="card">
+   <h3>⚖️ Risk/Reward</h3>
+   <p>Trade lene se pehle risk aur reward calculate karo.</p>
+  </div>
+ </div>
 </section>
 
-<section id="practice">
-<h2>🧪 Paper Trading</h2>
-<p class="sub">Real money ke bina trading practice karo.</p>
+<section id="paper">
+ <h2>💰 Paper Trading</h2>
+ <p class="sub">Real money ke bina trading practice karo.</p>
 
-<div class="cards">
-<div class="card">
-<div class="icon">💰</div>
-<h3>Virtual Balance</h3>
-<p>₹1,00,000 demo money se practice.</p>
-</div>
+ <div class="card">
+  <p>Virtual Balance</p>
+  <div class="balance" id="balance">₹1,00,000</div>
+  <p>Simulated market price: <b id="price">₹1,000</b></p>
+ </div>
 
-<div class="card">
-<div class="icon">🟢</div>
-<h3>Buy / Sell</h3>
-<p>Entry aur exit decisions practice karo.</p>
-</div>
+ <br>
 
-<div class="card">
-<div class="icon">📊</div>
-<h3>Profit / Loss</h3>
-<p>Apne trades ka performance track karo.</p>
-</div>
-</div>
+ <div class="tradebox">
+
+  <div class="card">
+   <h3>🟢 Buy / Sell</h3>
+
+   <label>Quantity</label>
+   <input id="qty" type="number" value="1" min="1">
+
+   <button class="btn buy" onclick="buy()">BUY</button>
+   <button class="btn sell" onclick="sell()">SELL</button>
+
+   <p id="message">Trade karne ke liye quantity enter karo.</p>
+  </div>
+
+  <div class="card">
+   <h3>📊 Your Position</h3>
+
+   <div class="stat">
+    <span>Quantity</span>
+    <b id="position">0</b>
+   </div>
+
+   <div class="stat">
+    <span>Average Price</span>
+    <b id="avg">₹0</b>
+   </div>
+
+   <div class="stat">
+    <span>Profit / Loss</span>
+    <b id="pnl">₹0</b>
+   </div>
+
+   <button class="btn secondary" onclick="resetTrade()">
+    Reset Practice
+   </button>
+  </div>
+
+ </div>
+
+ <br>
+
+ <div class="card">
+  <h3>📈 Simulated Price Chart</h3>
+  <canvas id="chart"></canvas>
+ </div>
 </section>
 
 <section id="risk">
-<h2>⚠️ Risk Management</h2>
-<p class="sub">Trading mein capital protection bahut important hai.</p>
-<div class="risk">
-<b>Golden Rule:</b>
-<p>Kisi bhi trade mein bina plan ke entry mat lo. Stop Loss, Position Size aur Risk/Reward ko samajhna zaroori hai.</p>
-</div>
+ <h2>⚠️ Risk Management</h2>
+ <p class="sub">
+ Trading mein capital protection bahut important hai.
+ </p>
+
+ <div class="warning">
+  <h3>Golden Rule:</h3>
+  <p>
+   Kisi bhi trade mein bina plan ke entry mat lo.
+   Stop Loss, Position Size aur Risk/Reward ko samajhna zaroori hai.
+  </p>
+  <p>
+   ⚠️ Ye website educational purpose aur paper-trading practice
+   ke liye hai. Real investment decision khud research karke lo.
+  </p>
+ </div>
 </section>
 
 <section>
-<h2>🚀 Coming Next</h2>
-<div class="cards">
-<div class="card">
-<div class="icon">📊</div>
-<h3>Interactive Charts</h3>
-<p>Better charts aur multiple timeframes.</p>
-</div>
-<div class="card">
-<div class="icon">💼</div>
-<h3>Portfolio</h3>
-<p>Virtual holdings aur P&L tracking.</p>
-</div>
-<div class="card">
-<div class="icon">📝</div>
-<h3>Trading Journal</h3>
-<p>Trades aur notes save karo.</p>
-</div>
-</div>
+ <h2>🚀 Coming Next</h2>
+
+ <div class="cards">
+  <div class="card">
+   <h3>📊 Interactive Charts</h3>
+   <p>Better charts aur multiple timeframes.</p>
+  </div>
+
+  <div class="card">
+   <h3>📝 Trade Journal</h3>
+   <p>Apne trades aur mistakes ka record rakho.</p>
+  </div>
+
+  <div class="card">
+   <h3>🎯 Strategy Practice</h3>
+   <p>Different trading strategies ko paper mode mein test karo.</p>
+  </div>
+ </div>
 </section>
 
 <footer>
-© 2026 Smart Trade · Educational & Paper Trading Project<br>
-Not financial advice
+ Smart Trade © 2026 | Learn • Practice • Manage Risk
 </footer>
+
+<script>
+let balance = 100000;
+let position = 0;
+let avgPrice = 0;
+let price = 1000;
+
+const balanceEl = document.getElementById("balance");
+const priceEl = document.getElementById("price");
+const positionEl = document.getElementById("position");
+const avgEl = document.getElementById("avg");
+const pnlEl = document.getElementById("pnl");
+const messageEl = document.getElementById("message");
+
+function money(n){
+ return "₹" + Math.round(n).toLocaleString("en-IN");
+}
+
+function update(){
+ balanceEl.textContent = money(balance);
+ priceEl.textContent = money(price);
+ positionEl.textContent = position;
+ avgEl.textContent = money(avgPrice);
+
+ let pnl = position * (price - avgPrice);
+ pnlEl.textContent = money(pnl);
+
+ pnlEl.className = pnl >= 0 ? "profit" : "loss";
+}
+
+function buy(){
+ let qty = Number(document.getElementById("qty").value);
+
+ if(qty <= 0){
+  messageEl.textContent = "Valid quantity enter karo.";
+  return;
+ }
+
+ let cost = qty * price;
+
+ if(cost > balance){
+  messageEl.textContent = "Virtual balance insufficient hai.";
+  return;
+ }
+
+ avgPrice =
+   ((position * avgPrice) + (qty * price)) /
+   (position + qty);
+
+ position += qty;
+ balance -= cost;
+
+ messageEl.textContent =
+   "BUY successful: " + qty + " units @ " + money(price);
+
+ update();
+}
+
+function sell(){
+ let qty = Number(document.getElementById("qty").value);
+
+ if(qty <= 0){
+  messageEl.textContent = "Valid quantity enter karo.";
+  return;
+ }
+
+ if(qty > position){
+  messageEl.textContent =
+   "Itni quantity available nahi hai.";
+  return;
+ }
+
+ balance += qty * price;
+ position -= qty;
+
+ if(position === 0){
+  avgPrice = 0;
+ }
+
+ messageEl.textContent =
+   "SELL successful: " + qty + " units @ " + money(price);
+
+ update();
+}
+
+function resetTrade(){
+ balance = 100000;
+ position = 0;
+ avgPrice = 0;
+ price = 1000;
+ messageEl.textContent = "Paper trading reset ho gaya.";
+ update();
+}
+
+/* Simple simulated chart */
+const canvas = document.getElementById("chart");
+const ctx = canvas.getContext("2d");
+
+let prices = [];
+for(let i=0;i<40;i++){
+ prices.push(950 + Math.random()*100);
+}
+
+function drawChart(){
+ canvas.width = canvas.clientWidth * 2;
+ canvas.height = canvas.clientHeight * 2;
+ ctx.scale(2,2);
+
+ let w = canvas.clientWidth;
+ let h = canvas.clientHeight;
+
+ ctx.clearRect(0,0,w,h);
+
+ let min = Math.min(...prices);
+ let max = Math.max(...prices);
+
+ ctx.beginPath();
+
+ prices.forEach((v,i)=>{
+  let x = i * w/(prices.length-1);
+  let y = h - ((v-min)/(max-min))*h;
+
+  if(i===0) ctx.moveTo(x,y);
+  else ctx.lineTo(x,y);
+ });
+
+ ctx.strokeStyle = "#31e875";
+ ctx.lineWidth = 3;
+ ctx.stroke();
+}
+
+function simulate(){
+ price += (Math.random()-0.5)*20;
+ price = Math.max(800, Math.min(1200, price));
+
+ prices.push(price);
+ if(prices.length > 40) prices.shift();
+
+ drawChart();
+ update();
+}
+
+window.addEventListener("resize",drawChart);
+
+update();
+drawChart();
+setInterval(simulate,2000);
+</script>
 
 </body>
 </html>
